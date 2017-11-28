@@ -10,7 +10,10 @@ export interface State { }
 
 export default class MoviePageContainer extends React.Component<Props, State> {
     render() {
-        return <MoviePage navigation={this.props.navigation} movie={this.props.navigation.state.params.movie} />;
+        return <MoviePage navigation={this.props.navigation}
+			  movie={this.props.navigation.state.params.movie}
+			  cinemaList={this.props.navigation.state.params.cinemaList}
+        />;
     }
 }
 

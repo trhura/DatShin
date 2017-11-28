@@ -5,6 +5,7 @@ import { Container, Content, View } from "native-base";
 export interface Props {
     navigation: any;
     movieList: any;
+    cinemaList: any;
 }
 
 export interface State { }
@@ -18,7 +19,10 @@ class MovieListPage extends React.Component<Props, State> {
                         {
                             this.props.movieList.map((movie, index) => (
                                 <TouchableHighlight key={index}
-                                    onPress={() => this.props.navigation.navigate("MovieDetail", { movie: movie })}>
+                                    onPress={() => this.props.navigation.navigate("MovieDetail", {
+                                        movie: movie,
+                                        cinemaList: this.props.cinemaList,
+                                    })}>
                                     <Image
                                         source={{ uri: movie.poster_url }}
                                         style={{ width: 120, height: 180 }}

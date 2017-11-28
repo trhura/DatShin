@@ -12,6 +12,7 @@ export interface Props {
 export interface State {
     isLoading: boolean;
     cinemaList: any;
+    movieList: any;
 }
 
 export default class CinemaListPageContainer extends React.Component<Props, State> {
@@ -26,7 +27,8 @@ export default class CinemaListPageContainer extends React.Component<Props, Stat
         super();
         this.state = {
             isLoading: true,
-            cinemaList: []
+            cinemaList: [],
+            movieList: []
         }
     }
 
@@ -36,9 +38,11 @@ export default class CinemaListPageContainer extends React.Component<Props, Stat
 
     async loadCinemaList() {
         let cinemaListByCity = await APIStore.cinemaListByCity();
+        let movieListByCinema = await APIStore.movieListByCinema();
         this.setState({
             isLoading: false,
-            cinemaList: cinemaListByCity
+            cinemaList: cinemaListByCity,
+            movieList: movieListByCinema,
         })
     }
 
@@ -49,7 +53,11 @@ export default class CinemaListPageContainer extends React.Component<Props, Stat
             );
         }
 
-        return <CinemaListPage navigation={this.props.navigation} cinemaList={this.state.cinemaList} />;
+        return <CinemaListPage
+		   navigation={this.props.navigation}
+		   cinemaList={this.state.cinemaList}
+		   movieList={this.state.movieList}
+        />;
     }
 }
 

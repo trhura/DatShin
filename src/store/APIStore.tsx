@@ -3,7 +3,9 @@ import axios from 'axios';
 namespace APIStore {
     let _cinemaList = [];
     let _movieList = [];
+    let _movieListByCinema = [];
     let _cinemaListByCity = {};
+    let _cinemaListByCode = {};
     let AUTH_TOKEN = "eTB0M3NoMW5jbDEzbnQweDEyNDpXYzcyY2dqLTk3YXA4Yypr";
     let client = axios.create({
         baseURL: 'http://appapi.yoteshinapp.com/api',
@@ -27,6 +29,23 @@ namespace APIStore {
         return _cinemaList;
     }
 
+    export async function movieListByCinema() {
+        if (Object.keys(_movieListByCinema).length > 0) return _movieListByCinema;
+
+        await movieList();
+        _movieList.forEach((movie) => {
+            movie.movie_info.show_times.forEach((show) => {
+                if (show.cinema_code in _movieListByCinema == false) {
+                    _movieListByCinema[show.cinema_code] = [];
+                }
+                _movieListByCinema[show.cinema_code].push(movie);
+            })
+        });
+
+        console.log(_movieListByCinema);
+        return _movieListByCinema;
+    }
+
     export async function cinemaListByCity() {
         if (Object.keys(_cinemaListByCity).length > 0) return _cinemaListByCity;
 
@@ -39,6 +58,18 @@ namespace APIStore {
             _cinemaListByCity[city].push(cinema);
         });
         return _cinemaListByCity;
+    }
+
+    export async function cinemaListByCode() {
+        if (Object.keys(_cinemaListByCode).length > 0) return _cinemaListByCode;
+
+        await cinemaList();
+        _cinemaList.forEach((cinema) => {
+            var code = cinema.cinema_code;
+            _cinemaListByCode[code] = cinema;
+        });
+
+        return _cinemaListByCode;
     }
 }
 

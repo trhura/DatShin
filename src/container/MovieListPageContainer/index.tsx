@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Icon } from "native-base";
 
 import APIStore from '../../store/APIStore';
 import MovieListPage from "../../stories/screens/MovieListPage";
@@ -12,21 +11,16 @@ export interface Props {
 export interface State {
     isLoading: boolean;
     movieList: any;
+    cinemaList: any;
 }
 
 export default class MovieListPageContainer extends React.Component<Props, State> {
-    static navigationOptions = {
-        tabBarLabel: "Movies",
-        tabBarIcon: ({ }) => (
-            <Icon name='home' />
-        )
-    }
-
     constructor() {
         super();
         this.state = {
             isLoading: true,
-            movieList: []
+            movieList: [],
+            cinemaList: []
         }
     }
 
@@ -36,9 +30,12 @@ export default class MovieListPageContainer extends React.Component<Props, State
 
     async loadMovieList() {
         let movieList = await APIStore.movieList();
+        let cinemaList = await APIStore.cinemaListByCode();
+
         this.setState({
             isLoading: false,
-            movieList: movieList
+            movieList: movieList,
+            cinemaList: cinemaList
         })
     }
 
@@ -49,7 +46,9 @@ export default class MovieListPageContainer extends React.Component<Props, State
             );
         }
 
-        return <MovieListPage navigation={this.props.navigation} movieList={this.state.movieList} />;
+        return <MovieListPage navigation={this.props.navigation}
+            movieList={this.state.movieList}
+            cinemaList={this.state.cinemaList} />;
     }
 }
 

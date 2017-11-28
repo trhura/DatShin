@@ -5,6 +5,7 @@ import Communications from 'react-native-communications';
 export interface Props {
     navigation: any;
     cinema: any;
+    movieList: any;
 }
 
 export interface State { }
@@ -28,6 +29,14 @@ class CinemaPage extends React.Component<Props, State> {
 
                         }
                     </Card>
+
+                    {
+                        this.props.movieList[this.props.cinema.cinema_code].map((movie, index) => (
+                            <Card key={index}>
+                                <CardItem header><Text>{movie.movie_title}</Text></CardItem>
+                            </Card>
+                        ))
+                    }
 
                 </Content>
             </Container >
