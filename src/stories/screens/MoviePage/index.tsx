@@ -24,7 +24,8 @@ class MoviePage extends React.Component<Props, State> {
                 title: "Call " + cinema,
             },
             itemIndex => {
-                Communications.phonecall(options[itemIndex], true);
+                if (itemIndex && itemIndex < (options.length - 1))
+                    Communications.phonecall(options[itemIndex], true);
             }
         );
     }

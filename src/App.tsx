@@ -3,6 +3,7 @@ import { TabNavigator, StackNavigator } from "react-navigation";
 import { Root, Icon } from "native-base";
 
 import AboutPage from "./container/AboutPageContainer";
+import UpcomingPage from "./container/UpcomingPageContainer";
 import MovieListPage from "./container/MovieListPageContainer";
 import MoviePage from "./container/MoviePageContainer";
 import CinemaListPage from "./container/CinemaListPageContainer";
@@ -24,7 +25,8 @@ const CinemasNavigator = StackNavigator({
     }
 });
 
-const MovieNavigator = StackNavigator({
+
+const ShowingNavigator = StackNavigator({
     MovieList: {
         screen: MovieListPage,
         navigationOptions: {
@@ -44,12 +46,23 @@ const TINTCOLOR = "#000";
 const App = TabNavigator(
     {
         Showing: {
-            screen: MovieNavigator,
+            screen: ShowingNavigator,
             navigationOptions: {
                 tabBarLabel: "Showing",
                 tabBarIcon: ({ tintColor }) => {
-                    if (tintColor === TINTCOLOR) return (<Icon name='images' android="md-images" active={true} />)
-                    else return (<Icon name='images' android="md-images" />)
+                    if (tintColor === TINTCOLOR) return (<Icon name='film' android="md-film" active={true} />)
+                    else return (<Icon name='film' android="md-film" />)
+                }
+            }
+        },
+
+        Upcoming: {
+            screen: UpcomingPage,
+            navigationOptions: {
+                tabBarLabel: "Upcoming",
+                tabBarIcon: ({ tintColor }) => {
+                    if (tintColor === TINTCOLOR) return (<Icon name='calendar' android="md-calendar" active={true} />)
+                    else return (<Icon name='calendar' android="md-calendar" />)
                 }
             }
         },
@@ -59,11 +72,12 @@ const App = TabNavigator(
             navigationOptions: {
                 tabBarLabel: "Cinemas",
                 tabBarIcon: ({ tintColor }) => {
-                    if (tintColor === TINTCOLOR) return (<Icon name='compass' android="md-compass" active={true} />)
-                    else return (<Icon name='compass' android="md-compass" />)
+                    if (tintColor === TINTCOLOR) return (<Icon name='podium' android="md-podium" active={true} />)
+                    else return (<Icon name='podium' android="md-podium" />)
                 }
             }
         },
+
         About: {
             screen: AboutPage,
             navigationOptions: {

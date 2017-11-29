@@ -3,13 +3,14 @@ import axios from 'axios';
 namespace APIStore {
     let _cinemaList = [];
     let _movieList = [];
+    let _upcomingMovieList = [];
     let _movieListByCinema = [];
     let _cinemaListByCity = {};
     let _cinemaListByCode = {};
     let AUTH_TOKEN = "eTB0M3NoMW5jbDEzbnQweDEyNDpXYzcyY2dqLTk3YXA4Yypr";
     let client = axios.create({
         baseURL: 'http://appapi.yoteshinapp.com/api',
-        timeout: 3000,
+        timeout: 5000,
         headers: { 'Authorization': 'Basic ' + AUTH_TOKEN }
     });
 
@@ -19,6 +20,14 @@ namespace APIStore {
         let response = await client.get('/schedules?status=showing');
         _movieList = response.data;
         return _movieList;
+    }
+
+    export async function upcomingMovieList() {
+        if (_upcomingMovieList.length > 0) return _upcomingMovieList;
+
+        let response = await client.get('/schedules?status=upcoming');
+        _upcomingMovieList = response.data;
+        return _upcomingMovieList;
     }
 
     export async function cinemaList() {
@@ -42,7 +51,6 @@ namespace APIStore {
             })
         });
 
-        console.log(_movieListByCinema);
         return _movieListByCinema;
     }
 

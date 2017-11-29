@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Text } from "native-base";
 import AboutPage from "../../stories/screens/AboutPage";
 
 export interface Props {
