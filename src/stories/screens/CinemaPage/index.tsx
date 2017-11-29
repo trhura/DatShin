@@ -1,5 +1,7 @@
 import React from "react";
-import { Container, Body, Card, CardItem, Icon, Text, Content, } from "native-base";
+import { Image } from 'react-native';
+import { Right, Container, Body, Card, CardItem, Icon, Text, Content, } from "native-base";
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import Communications from 'react-native-communications';
 
 export interface Props {
@@ -11,14 +13,17 @@ export interface Props {
 export interface State { }
 
 class CinemaPage extends React.Component<Props, State> {
-
     render() {
         return (
             <Container>
-                <Content>
+                <Content padder>
                     <Card>
-                        <CardItem header><Text>{this.props.cinema.name}</Text></CardItem>
-                        <CardItem><Body><Text note>{this.props.cinema.address}</Text></Body></CardItem>
+                        <CardItem header>
+                            <Text>{this.props.cinema.name}</Text>
+                        </CardItem>
+                        <CardItem>
+                            <Body><Text note>{this.props.cinema.address}, {this.props.cinema.city}</Text></Body>
+                        </CardItem>
                         {
                             this.props.cinema.phone.split("^").map((phone, i) => (
                                 <CardItem key={i} button onPress={() => Communications.phonecall(phone, true)}>
@@ -32,8 +37,22 @@ class CinemaPage extends React.Component<Props, State> {
 
                     {
                         this.props.movieList[this.props.cinema.cinema_code].map((movie, index) => (
-                            <Card key={index}>
-                                <CardItem header><Text>{movie.movie_title}</Text></CardItem>
+                            <Card key={index} style={{ height: 190 }}>
+                                <Grid style={{ margin: 5 }}>
+                                    <Col style={{ left: 5 }}>
+                                        <Row style={{ flex: -1, marginBottom: 10 }}><Text>{movie.movie_title}</Text></Row>
+                                        <Row>
+                                            <Text numberOfLines={7} note> {movie.movie_info.tagline}</Text>
+                                        </Row>
+                                    </Col>
+                                    <Right>
+                                        <Col>
+                                            <Image
+                                                source={{ uri: movie.poster_url }}
+                                                style={{ width: 120, height: 180 }} />
+                                        </Col>
+                                    </Right>
+                                </Grid>
                             </Card>
                         ))
                     }

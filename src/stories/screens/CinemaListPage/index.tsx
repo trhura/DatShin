@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Content, Text, List, ListItem, Separator } from "native-base";
+import { Container, Content, Text, List, ListItem } from "native-base";
 
 export interface Props {
     navigation: any;
@@ -17,11 +17,16 @@ class CinemaListPage extends React.Component<Props, State> {
                     {
                         Object.keys(this.props.cinemaList).map((city, i) => {
                             return (
-                                <List key={i}>
-                                    <Separator><Text>{city}</Text></Separator>
+                                <List key={i} style={{ backgroundColor: '#fcfcfc' }}>
+                                    <ListItem
+                                        style={{ width: '100%', marginLeft: 0, paddingLeft: 15 }}
+                                        itemDivider>
+                                        <Text style={{ fontWeight: "bold" }}>{city}</Text>
+                                    </ListItem>
                                     {
-                                        this.props.cinemaList[city].map((cinema, j) => (
-                                            <ListItem key={j}
+                                        this.props.cinemaList[city].map((cinema, i) => (
+                                            <ListItem key={i}
+                                                style={{ width: '100%', marginLeft: 0, paddingLeft: 20 }}
                                                 onPress={() => this.props.navigation.navigate("CinemaDetail", {
                                                     cinema: cinema,
                                                     movieList: this.props.movieList

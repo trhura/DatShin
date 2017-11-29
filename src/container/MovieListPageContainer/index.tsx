@@ -6,6 +6,7 @@ import LoadingPage from "../../stories/screens/LoadingPage";
 
 export interface Props {
     navigation: any,
+    movieList: any,
 }
 
 export interface State {

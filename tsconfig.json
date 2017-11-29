@@ -15,7 +15,7 @@
 		"sourceMap": true,
 		"noImplicitReturns": true,
 		"noUnusedParameters": true,
-		"noUnusedLocals": true
+	    "noUnusedLocals": true
 	},
 	"types": ["react", "react-native", "jest"],
 	"exclude": ["android", "App.js", "ios", "build", "node_modules"],

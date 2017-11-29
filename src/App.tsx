@@ -2,7 +2,7 @@ import React from "react";
 import { TabNavigator, StackNavigator } from "react-navigation";
 import { Root, Icon } from "native-base";
 
-import NowPage from "./container/NowPageContainer";
+import AboutPage from "./container/AboutPageContainer";
 import MovieListPage from "./container/MovieListPageContainer";
 import MoviePage from "./container/MoviePageContainer";
 import CinemaListPage from "./container/CinemaListPageContainer";
@@ -20,7 +20,6 @@ const CinemasNavigator = StackNavigator({
         screen: CinemaPage,
         navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.cinema.name}`,
-            headerBackTitle: "Back",
         }),
     }
 });
@@ -29,7 +28,7 @@ const MovieNavigator = StackNavigator({
     MovieList: {
         screen: MovieListPage,
         navigationOptions: {
-            title: 'Movies',
+            title: 'Currently Showing',
         },
     },
 
@@ -37,42 +36,52 @@ const MovieNavigator = StackNavigator({
         screen: MoviePage,
         navigationOptions: ({ navigation }) => ({
             title: `${navigation.state.params.movie.movie_title}`,
-            headerBackTitle: "Back",
         }),
     }
 });
 
+const TINTCOLOR = "#000";
 const App = TabNavigator(
     {
+        Showing: {
+            screen: MovieNavigator,
+            navigationOptions: {
+                tabBarLabel: "Showing",
+                tabBarIcon: ({ tintColor }) => {
+                    if (tintColor === TINTCOLOR) return (<Icon name='images' android="md-images" active={true} />)
+                    else return (<Icon name='images' android="md-images" />)
+                }
+            }
+        },
+
         Cinemas: {
             screen: CinemasNavigator,
             navigationOptions: {
                 tabBarLabel: "Cinemas",
-                tabBarIcon: ({ }) => (<Icon name='md-navigate' />)
+                tabBarIcon: ({ tintColor }) => {
+                    if (tintColor === TINTCOLOR) return (<Icon name='compass' android="md-compass" active={true} />)
+                    else return (<Icon name='compass' android="md-compass" />)
+                }
             }
         },
-
-        Movies: {
-            screen: MovieNavigator,
+        About: {
+            screen: AboutPage,
             navigationOptions: {
-                tabBarLabel: "Movies",
-                tabBarIcon: ({ }) => (<Icon name='md-images' />)
+                tabBarLabel: "About",
+                tabBarIcon: ({ tintColor }) => {
+                    if (tintColor === TINTCOLOR) return (<Icon name='help-circle' android="md-help-circle" active={true} />)
+                    else return (<Icon name='help-circle' android="md-help-circle" />)
+                }
             }
         },
-
-        Now: {
-            screen: NowPage,
-            navigationOptions: {
-                tabBarLabel: "Now",
-                tabBarIcon: ({ }) => (<Icon name='md-time' />)
-            }
-        },
-
     },
     {
         tabBarPosition: 'bottom',
         animationEnabled: true,
         swipeEnabled: true,
+        tabBarOptions: {
+            activeTintColor: TINTCOLOR
+        }
     }
 );
 
