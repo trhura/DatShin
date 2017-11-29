@@ -1,49 +1,11 @@
 
-## React Native Seed v1.0.0
+## DatShin
 
-### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [NativeBase](https://nativebase.io/) + [React Navigation](https://reactnavigation.org/) + [MobX](https://github.com/mobxjs/mobx) Apps (iOS & Android)
+### The second fastest way to find out movies, show times and cinemas in Myanmar. Basically, a clone of Yote Shin, in react native + typescript.
 
-*Brought to you by [GeekyAnts](https://geekyants.com/)*
-
-
-## Get Started
-
-### 1. System Requirements
-
-* Globally installed [node](https://nodejs.org/en/)
-
-* Globally installed [react-native CLI](https://facebook.github.io/react-native/docs/getting-started.html)
+*Brought to you by [ArpalarTech](https://geekyants.com/)*
 
 
-### 2. Installation
+## Installation
 
-On the command prompt run the following commands
-
-```sh
-$ git clone https://github.com/GeekyAnts/react-native-boilerplate-mobx-typescript.git
-
-$ cd react-native-boilerplate-mobx-typescript/
-
-$ npm install
-  or
-  yarn
-```
-
-### Run on iOS
-
-  * Opt #1:
-		*	Run `npm start` in your terminal
-		*	Scan the QR code in your Expo app
-	*	Opt #2:
-		*	Run `npm run ios` in your terminal
-
-### Run on Android
-
-  * Opt #1:
-		*	Run `npm start` in your terminal
-		*	Scan the QR code in your Expo app
-	*	Opt #2:
-		*	Run `npm run android` in your terminal
-
-
-For apps with more advance designs, please visit **[NativeBase Market](https://market.nativebase.io/)**.
+### To Be Done
